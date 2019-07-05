@@ -2,6 +2,7 @@ package com.leaning.reactive.reactivelearning;
 
 import org.junit.Test;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 public class FluxAndMonoTest {
@@ -48,6 +49,21 @@ public class FluxAndMonoTest {
                 .expectNext("I", "LOVE", "SPRING-REACTOR")
                 .expectErrorMessage("Test Error Message")
                 .verify();
+    }
+
+    @Test
+    public void monoTest_withoutError() {
+        Mono<String> stringMono = Mono.just("Spring");
+        StepVerifier.create(stringMono.log())
+                .expectNext("Spring")
+                .verifyComplete();
+    }
+
+    @Test
+    public void monoTest_withError() {
+        StepVerifier.create(Mono.error(new RuntimeException("Test")).log())
+                .verifyError(RuntimeException.class);
+
     }
 
 
