@@ -12,7 +12,6 @@ public class FluxAndMonoFactoryMethod {
     @Test
     public void createFluxFromList() {
         List<String> stringList = Arrays.asList("I", "Love", "Spring-Reactive");
-
         Flux<String> stringFlux = Flux.fromIterable(stringList);
 
         StepVerifier
@@ -30,5 +29,11 @@ public class FluxAndMonoFactoryMethod {
                 .create(stringFlux.log())
                 .expectNext("I", "LOVE", "SPRING-REACTIVE")
                 .verifyComplete();
+    }
+
+    @Test
+    public void createFluxFromStream() {
+        List<String> stringList = Arrays.asList("I", "Love", "Spring-Reactive");
+
     }
 }
